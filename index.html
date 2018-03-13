@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<html>
+
+<head>
+
+  <title>Synthy III</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+
+  <button id="tap"></button>
+  <input id="range" type="range" min="0" max="127" />
+  <button id="channel"></button>
+  
+  <p>Current channel is <span id="currentChannel">NULL</span></p>
+
+  <script src="script.js"></script>
+
+  <h1>Synthy 3</h1>
+
+  <p>Synthy 3 is a collaborative note sender. It has three parts</p>
+  <ul>
+    <li>A button for triggering notes (hold for longer)</li>
+    <li>A dial for pitch<sup><a href="#pitch">*</a></sup></li>
+    <li>A binary number channel picker.</li>
+  </ul>
+  
+  <p>The channel picker takes a series of long or short presses to mean 0 or 1 in a binary sequence. For example: short press + long press is 2. The channel is the current channel you are both sending notes to, and receiving notes from. To change channel, press in a value and then wait a few seconds.</p>
+
+  <small id="pitch"><sup>*</sup> - Pitch is based on the 0 - 127 MIDI note frequencies.</small>
+</body>
+
+</html>
