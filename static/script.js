@@ -1,22 +1,43 @@
-const socket = new WebSocket('ws://localhost:8080');
+const socket = new WebSocket('ws://' + document.location.hostname);
 
-let ID;
+let connections = {};
 
-socket.addEventListener('connected', function (event) {
-  
-  // Get unique ID from server
-  
+socket.addEventListener('message', function (event) {
+
+  try {
+
+    let message = JSON.parse(event.data);
+
+    if (!connections[message.id]) {
+
+      connections[message.id] = context.createOscillator();
+
+    }
+
+    let osc = connections[message.id];
+
+    if (message.status === "on") {
+
+      osc.frequency.value = midiNotetoFreq(message.note);
+
+      osc.connect(context.destination);
+
+      osc.start(0);
+
+    } else {
+
+      osc.stop();
+      delete connections[message.id];
+
+    }
+
+  } catch (e) {
+
+
+  }
+
 });
 
-socket.addEventListener('noteOn', function (event) {
-  
-  
-});
-
-socket.addEventListener('noteOff', function (event) {
-  
-  
-});
 
 let midiNotetoFreq = (note) => Math.pow(2, (note - 69) / 12) * 440;
 
@@ -34,18 +55,19 @@ let playNote = (element, send) => {
 
   if (send) {
 
-    sendNote(document.getElementById("range").value, document.getElementById("channel").channel, "on");
+    sendNote("on");
 
   }
 
 };
 
-let sendNote = (note, channel, status) => {
+let sendNote = (status) => {
 
   let message = {
-    "channel": channel,
-    "note": note,
-    "status": "on"
+    "type": "note",
+    "channel": document.getElementById("channel").channel,
+    "note": document.getElementById("range").value,
+    "status": status
   };
 
   socket.send(JSON.stringify(message));
@@ -57,8 +79,8 @@ document.getElementById("tap").onmousedown = (e) => playNote(e.target, true);
 document.getElementById("tap").onmouseup = (e) => {
 
   e.target.osc.stop();
-  
-  sendNote(null, null, "off");
+
+  sendNote("off");
 
 };
 
@@ -112,6 +134,11 @@ document.getElementById("channel").onmouseup = function (e) {
     let channel = parseInt(e.target.channelArray.reverse().join(""), 2);
 
     e.target.channel = channel;
+
+    socket.send(JSON.stringify({
+      "type": "channelTune",
+      "channel": channel
+    }))
 
     document.getElementById("currentChannel").innerHTML = channel;
 

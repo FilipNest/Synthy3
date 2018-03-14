@@ -3,5 +3,9 @@
   "version": "0.1.0",
   "description": "",
   "main": "script.js",
-  "author": "FilipNest"
+  "author": "FilipNest",
+  "dependencies": {
+    "express": "^4.16.3",
+    "ws": "^5.0.0"
+  }
 }
