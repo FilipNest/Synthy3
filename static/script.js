@@ -147,3 +147,9 @@ document.getElementById("channel").onmouseup = function (e) {
   }, 5000);
 
 };
+
+document.getElementById("tap").ontouchstart = document.getElementById("tap").onmousedown;
+document.getElementById("tap").ontouchend = document.getElementById("tap").onmouseup;
+
+document.getElementById("channel").ontouchstart = document.getElementById("channel").onmousedown;
+document.getElementById("channel").ontouchend = document.getElementById("channel").onmouseup;
