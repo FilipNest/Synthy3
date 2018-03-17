@@ -20,7 +20,7 @@ socket.addEventListener('message', function (event) {
 
       osc.frequency.value = midiNotetoFreq(message.note);
 
-      osc.connect(context.destination);
+      osc.connect(gain);
 
       osc.start(0);
 
@@ -42,6 +42,9 @@ socket.addEventListener('message', function (event) {
 let midiNotetoFreq = (note) => Math.pow(2, (note - 69) / 12) * 440;
 
 let context = new window.AudioContext();
+let gain = context.createGain();
+gain.gain.value = 0.1;
+gain.connect(context.destination);
 
 let playNote = (element, send) => {
 
@@ -49,7 +52,7 @@ let playNote = (element, send) => {
 
   element.osc.frequency.value = midiNotetoFreq(document.getElementById("range").value);
 
-  element.osc.connect(context.destination);
+  element.osc.connect(gain);
 
   element.osc.start(0);
 
