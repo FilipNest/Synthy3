@@ -2,6 +2,11 @@ body {
   font-family: monospace;
 }
 
+button,
+input {
+  cursor: pointer;
+}
+
 #tap {
   width: 100px;
   height: 100px;
