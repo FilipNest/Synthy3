@@ -167,7 +167,7 @@ document.getElementById("tap").onmouseup = tapUp;
 document.getElementById("channel").onmousedown = channelDown;
 document.getElementById("channel").onmouseup = channelUp;
 
-document.getElementById("tap").ontouchstart = tapUp;
-document.getElementById("tap").ontouchend = tapDown;
+document.getElementById("tap").ontouchstart = tapDown;
+document.getElementById("tap").ontouchend = tapUp;
 document.getElementById("channel").tontouchstart = channelDown;
 document.getElementById("channel").ontouchend = channelUp;
