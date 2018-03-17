@@ -77,9 +77,16 @@ let sendNote = (status) => {
 
 };
 
-document.getElementById("tap").onpointerdown = (e) => playNote(e.target, true);
+let tapDown = (e) => {
 
-document.getElementById("tap").onpointerup = (e) => {
+  e.preventDefault();
+  playNote(e.target, true);
+
+};
+
+let tapUp = (e) => {
+
+  e.preventDefault();
 
   e.target.osc.stop();
 
@@ -87,7 +94,9 @@ document.getElementById("tap").onpointerup = (e) => {
 
 };
 
-document.getElementById("channel").onpointerdown = (e) => {
+let channelDown = (e) => {
+
+  e.preventDefault();
 
   e.target.style.backgroundColor = "red";
 
@@ -112,7 +121,9 @@ document.getElementById("channel").onpointerdown = (e) => {
 
 };
 
-document.getElementById("channel").onpointerup = function (e) {
+let channelUp = function (e) {
+
+  e.preventDefault();
 
   window.clearTimeout(e.target.timerLong);
   window.clearTimeout(e.target.timerShort);
@@ -150,3 +161,13 @@ document.getElementById("channel").onpointerup = function (e) {
   }, 5000);
 
 };
+
+document.getElementById("tap").onmousedown = tapDown;
+document.getElementById("tap").onmouseup = tapUp;
+document.getElementById("channel").onmousedown = channelDown;
+document.getElementById("channel").onmouseup = channelUp;
+
+document.getElementById("tap").ontouchstart = tapUp;
+document.getElementById("tap").ontouchend = tapDown;
+document.getElementById("channel").tontouchstart = channelDown;
+document.getElementById("channel").ontouchend = channelUp;
