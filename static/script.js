@@ -162,12 +162,7 @@ let channelUp = function (e) {
 
 };
 
-document.getElementById("tap").onmousedown = tapDown;
-document.getElementById("tap").onmouseup = tapUp;
-document.getElementById("channel").onmousedown = channelDown;
-document.getElementById("channel").onmouseup = channelUp;
-
-document.getElementById("tap").ontouchstart = tapDown;
-document.getElementById("tap").ontouchend = tapUp;
-document.getElementById("channel").tontouchstart = channelDown;
-document.getElementById("channel").ontouchend = channelUp;
+document.getElementById("tap").onpointerdown = tapDown;
+document.getElementById("tap").onpointerup = tapUp;
+document.getElementById("channel").onpointerdown = channelDown;
+document.getElementById("channel").onpointerup = channelUp;
