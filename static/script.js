@@ -74,9 +74,9 @@ let sendNote = (status) => {
 
 };
 
-document.getElementById("tap").onmousedown = (e) => playNote(e.target, true);
+document.getElementById("tap").onpointerdown = (e) => playNote(e.target, true);
 
-document.getElementById("tap").onmouseup = (e) => {
+document.getElementById("tap").onpointerup = (e) => {
 
   e.target.osc.stop();
 
@@ -84,7 +84,7 @@ document.getElementById("tap").onmouseup = (e) => {
 
 };
 
-document.getElementById("channel").onmousedown = (e) => {
+document.getElementById("channel").onpointerdown = (e) => {
 
   e.target.style.backgroundColor = "red";
 
@@ -109,7 +109,7 @@ document.getElementById("channel").onmousedown = (e) => {
 
 };
 
-document.getElementById("channel").onmouseup = function (e) {
+document.getElementById("channel").onpointerup = function (e) {
 
   window.clearTimeout(e.target.timerLong);
   window.clearTimeout(e.target.timerShort);
@@ -138,7 +138,7 @@ document.getElementById("channel").onmouseup = function (e) {
     socket.send(JSON.stringify({
       "type": "channelTune",
       "channel": channel
-    }))
+    }));
 
     document.getElementById("currentChannel").innerHTML = channel;
 
@@ -147,9 +147,3 @@ document.getElementById("channel").onmouseup = function (e) {
   }, 5000);
 
 };
-
-document.getElementById("tap").ontouchstart = document.getElementById("tap").onmousedown;
-document.getElementById("tap").ontouchend = document.getElementById("tap").onmouseup;
-
-document.getElementById("channel").ontouchstart = document.getElementById("channel").onmousedown;
-document.getElementById("channel").ontouchend = document.getElementById("channel").onmouseup;
